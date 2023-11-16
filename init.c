@@ -68,6 +68,41 @@ int	ft_check_list(t_commands *cmd)
 	return (0);
 }
 
+void	ft_remove_spaces(char **str)
+{
+	int		count2;
+	char	*tmp;
+
+	count2 = 0;
+	while (!ft_isascii(str[0][count2]) || str[0][count2] == ' '
+		|| str[0][count2] == '\t' || str[0][count2] == '\v')
+		count2 ++;
+	if (count2)
+	{
+		tmp = ft_strdup(&str[0][count2]);
+		free(str[0]);
+		str[0] = tmp;
+	}
+}
+
+//serve per rimuovere spazi in eccesso all'inizio 
+//di ciascun comando (cmd) in una lista di comandi (t_commands)
+void	ft_remove_all_spaces(t_commands *cmd)
+{
+	t_commands	*tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		if (!tmp->cmd)
+			return ;
+		if (!ft_isascii(tmp->cmd[0]) || tmp->cmd[0] == ' '
+			|| tmp->cmd[0] == '\t' || tmp->cmd[0] == '\v')
+			ft_remove_spaces(&tmp->cmd);
+		tmp = tmp->next;
+	}
+}
+
     /* Used to check the input and pass it to the parsing and cutting
  functions to get back either a linked list with all the command original
  just one command in a node */ 
@@ -89,7 +124,7 @@ int     ft_parse_init(char *str, t_env **env_lst)
 	}
 	if (!cmd->cmd || !strlen(cmd->cmd) | ft_check_list(cmd))
 		return (ft_free_cmdlist(&cmd));
-	ft_removesurplusspaces(cmd);/////
+	ft_remove_all_spaces(cmd);
 	ft_convertsyscommands(cmd, *env_lst);////////
 	ft_create_fullcmd(cmd);/////////
 	ft_add_env_lastcmd(cmd, *env_lst);////////

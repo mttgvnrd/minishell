@@ -42,9 +42,53 @@ int		ft_open_quotes(char *input)
 		return (printf("minishell: unclosed qoute detected.\n"), 1);
 	}
 	return (0);
-
 }
 
+//studia
+void	ft_free_envlist(t_env **env_list)
+{
+	t_env	*tmp;
+
+	tmp = *env_list;
+	while (tmp)
+	{
+		*env_list = (*env_list)->next;
+		if (tmp->var)
+			free(tmp->var);
+		if (tmp->value)
+			free(tmp->value);
+		free(tmp);
+		tmp = *env_list;
+	}
+}
+
+//studia
+void	ft_exit_minihell(t_cmds *cmd, t_env *env_list)
+{
+	int	exitcode;
+
+	if (!cmd->args)
+		exitcode = 0;
+	else
+	{
+		if (cmd->args[0] && ft_isdigit(cmd->args[0][0]))
+			exitcode = ft_atoi(cmd->args[0]);
+		else
+		{
+			exitcode = 0;
+			printf("minishell: exit: %s: numeric argument required\n",
+				cmd->args[0]);
+		}
+	}
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_save_attr);
+	ft_free_cmdlist(&cmd);
+	ft_free_envlist(&env_list);
+	write(1, "exit\n", 5);
+	clear_history();
+	exit(exitcode);
+}
+
+/* Used to display the prompt and read the input from the user */
 int		ft_init_shell(char **env)
 {
 	char	*str;

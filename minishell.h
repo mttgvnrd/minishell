@@ -92,6 +92,9 @@ char	*ft_token(char *str, char *in_put, int *index, t_env *env_list);
 int     ft_parse_init(char *str, t_env **env_lst);
 t_env  *ft_get_env(char **env);
 t_env  *ft_new_envnode(char *env, int index);
+void	ft_remove_all_spaces(t_commands *cmd);
+void	ft_remove_spaces(char **str);
+int	    ft_check_list(t_commands *cmd);
 
 //SIGNAL
 void    ft_ctrl_ingore(int sig);
