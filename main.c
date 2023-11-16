@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-int		ft_open_quotes(char *input)
 // controllo sulle ('') e (""), verifica se ci sono virgolette aperte e non chiuse
 // se close ha un valore vuol dire che non sono state chiuse 
 // le vigolette e quindi stampera un mex di errore
+int		ft_open_quotes(char *input)
 {
 	char	divid;
 	int		index;
@@ -60,7 +60,7 @@ int		ft_init_shell(char **env)
 		if (ft_open_quotes(str))
 			continue;
 		ft_parse_init(ft_strdup(str) , &env_lst);
-		
+		free(str);
 	}
 
 }

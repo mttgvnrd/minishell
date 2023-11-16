@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-t_env  *ft_new_envnode(char *env, int index)
 //questa funzione crea un nodo della lista concatenata t_env 
 //a partire da una stringa di variabile d'ambiente envp e un indice index.
+t_env  *ft_new_envnode(char *env, int index)
 {
     t_env  *node;
     char    **c;
@@ -30,9 +30,9 @@ t_env  *ft_new_envnode(char *env, int index)
 	return (node);
 }
 
-t_env  *ft_get_env(char **env)
 // crea una lista concatenata di tipo t_env a partire da un array di
 // stringhe envp, dove ogni elemento dell'array rappresenta una variabile d'ambiente.
+t_env  *ft_get_env(char **env)
 {
     int     i;
     t_env   *head;
@@ -51,6 +51,21 @@ t_env  *ft_get_env(char **env)
         temp = temp->next;
     }
     return (head);
+}
+
+//Questa funzione verifica se ci sono comandi vuoti nella lista di comandi (t_commands).
+int	ft_check_list(t_commands *cmd)
+{
+	t_commands	*tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		if (!tmp->cmd)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
     /* Used to check the input and pass it to the parsing and cutting
@@ -72,11 +87,11 @@ int     ft_parse_init(char *str, t_env **env_lst)
 		printf("minihell: syntax error near unexpected token `%s' \n", str);
 		return ;
 	}
-	if (!cmd->cmd || !strlen(cmd->cmd) | ft_checkforgarbage(cmd))
+	if (!cmd->cmd || !strlen(cmd->cmd) | ft_check_list(cmd))
 		return (ft_free_cmdlist(&cmd));
-	ft_removesurplusspaces(cmd);
-	ft_convertsyscommands(cmd, *env_lst);
-	ft_create_fullcmd(cmd);
-	ft_add_env_lastcmd(cmd, *env_lst);
-	ft_cmd_analysis(cmd, env_lst);
+	ft_removesurplusspaces(cmd);/////
+	ft_convertsyscommands(cmd, *env_lst);////////
+	ft_create_fullcmd(cmd);/////////
+	ft_add_env_lastcmd(cmd, *env_lst);////////
+	ft_cmd_analysis(cmd, env_lst);/////////
 }

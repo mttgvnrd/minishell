@@ -34,6 +34,8 @@ typedef struct s_env
 typedef struct s_commands
 {
     char    *cmd;
+    char    **args;
+    struct s_env    *next;
 
 
 }   t_commands;
@@ -79,6 +81,7 @@ int     ft_count_lines(int fd);
 t_commands	*ft_check_input(char *str, t_env *env_lst);
 char    ft_split_input(char *input);
 char    *ft_cut(char *input, int *index);
+t_commands	*ft_cmd_analyze(t_commands *cmd, char **full_cmds, t_env *env_list);
 //////////////////////////////////////////DA FINIRE
 
 //LEXER
@@ -93,5 +96,8 @@ t_env  *ft_new_envnode(char *env, int index);
 //SIGNAL
 void    ft_ctrl_ingore(int sig);
 int		ft_set_terminal(void);
+
+//INPUT
+void	ft_free_cmdlist(t_commands **cmd);
 
 #endif

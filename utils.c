@@ -33,8 +33,8 @@
     return(clone);
 }*/
 
-char	**ft_double_realloc(char **str, int old_size, int new_size)
 /* rialloca memoria per la stringa a doppio puntatore */
+char	**ft_double_realloc(char **str, int old_size, int new_size)
 {
 	char	**tmp;
 	int		count;
@@ -52,7 +52,6 @@ char	**ft_double_realloc(char **str, int old_size, int new_size)
 }
 
 char	*ft_strjoin_free(char *s1, char *s2)
-/* Ignora gli spazi e ritorna il punto in cui non ci sono piu*/
 {
 	char	*nstr;
 	size_t	len_s1;
@@ -74,6 +73,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (nstr);
 }
 
+/* Ignora gli spazi e ritorna il punto in cui non ci sono piu*/
 int	ft_skip_spaces (char *str)
 {
 	int	i;
