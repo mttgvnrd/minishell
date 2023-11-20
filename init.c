@@ -125,8 +125,7 @@ int     ft_parse_init(char *str, t_env **env_lst)
 	if (!cmd->cmd || !strlen(cmd->cmd) | ft_check_list(cmd))
 		return (ft_free_cmdlist(&cmd));
 	ft_remove_all_spaces(cmd);
-	ft_convertsyscommands(cmd, *env_lst);////////
-	ft_create_fullcmd(cmd);/////////
+	ft_convertsys(cmd, *env_lst);
 	ft_add_env_lastcmd(cmd, *env_lst);////////
 	ft_cmd_analysis(cmd, env_lst);/////////
 }

@@ -23,6 +23,12 @@
 # include <fcntl.h>
 # include <termios.h>
 
+
+# define INPUT 1
+# define HEREDOC 2
+# define OUTPUT 4
+# define APPEND 8
+
 typedef struct s_env
 {
     char    *var;
@@ -33,8 +39,15 @@ typedef struct s_env
 
 typedef struct s_commands
 {
+    char    *from_file;
     char    *cmd;
+    char    **hdocs_end;
     char    **args;
+    char    **to_file;
+    char    **full_cmd;
+    int     input;
+    int     output;
+    int     redirect;
     struct s_env    *next;
 
 
@@ -102,5 +115,18 @@ int		ft_set_terminal(void);
 
 //INPUT
 void	ft_free_cmdlist(t_commands **cmd);
+
+//CMDSYSTEM
+void	ft_convertsys(t_commands *cmd, t_env *envp);
+char	**ft_getpath(t_env *envp);
+int	    ft_checkpath(char *command, char **paths);
+char	*ft_crate_path(char *path, char *command);
+
+//SYS UTILS
+
+int	ft_issyscmd(char *cmd, t_env *envp); 
+int	ft_strcmp(char *s1, char *s2);
+int	ft_isnonsyscmd(char *arg);
+
 
 #endif

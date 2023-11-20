@@ -15,24 +15,24 @@
 //libera la struttura t_commands
 void	ft_free_cmdlist(t_commands **cmd)
 {
-	t_commands	*tmp;
+	t_commands	*cpy;
 
-	tmp = *cmds;
-	while (tmp)
+	cpy = *cmds;
+	while (cpy)
 	{
 		*cmds = (*cmds)->next;
-		if (tmp->cmd)
-			free(tmp->cmd);
-		if (tmp->args)
-			ft_free_double_str(tmp->args);
-		if (tmp->full_cmd)
-			ft_free_double_str(tmp->full_cmd);
-		if ((tmp->redirect & INPUT))
-			free(tmp->from_file);
-		if ((tmp->redirect & HEREDOC))
-			ft_free_double_str(tmp->hdocs_end);
-		if ((tmp->redirect & OUTPUT) || (tmp->redirect & APPEND))
-			ft_free_double_str(tmp->to_file);
+		if (cpy->cmd)
+			free(cpy->cmd);
+		if (cpy->args)
+			ft_free_double_str(cpy->args);
+		if (cpy->full_cmd)
+			ft_free_double_str(cpy->full_cmd);
+		if ((cpy->redirect & INPUT))
+			free(cpy->from_file);
+		if ((cpy->redirect & HEREDOC))
+			ft_free_double_str(cpy->hdocs_end);
+		if ((cpy->redirect & OUTPUT) || (cpy->redirect & APPEND))
+			ft_free_double_str(cpy->to_file);
 		free(tmp);
 		tmp = *cmds;
 	}

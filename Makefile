@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = minishell
-SRC =  main.c init.c signal.c utils.c parsing.c
+SRC =  main.c init.c signal.c utils.c parsing.c input.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
 RM = rm -f
