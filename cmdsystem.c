@@ -68,6 +68,8 @@ char	**ft_getpath(t_env *envp)
 }
 
 void	ft_create_fullcmd(t_commands *cmd)
+//costruisce un array di stringhe contenente il comando 
+//principale e i suoi argomenti
 {
 	char	**full_cmd;
 	int		count;

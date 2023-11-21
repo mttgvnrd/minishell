@@ -37,7 +37,7 @@ t_commands *ft_parser(char **array_cmds)
 		cmd->args[count - 1] = ft_strdup(array_cmds[count]);
 		cmd->args = ft_double_realloc(cmd->args, count, count + 1);
 	}
-	ft_free_dstr(array_cmds);
+	ft_free_double_str(array_cmds);
 	return (cmd);
 }
 

@@ -102,7 +102,7 @@ char    **ft_lexer(char *input, t_env *env_lst);
 char	*ft_token(char *str, char *in_put, int *index, t_env *env_list);
 
 //INIT
-int     ft_parse_init(char *str, t_env **env_lst);
+void     ft_parse_init(char *str, t_env **env_lst);
 t_env  *ft_get_env(char **env);
 t_env  *ft_new_envnode(char *env, int index);
 void	ft_remove_all_spaces(t_commands *cmd);
@@ -114,6 +114,11 @@ void    ft_ctrl_ingore(int sig);
 int		ft_set_terminal(void);
 
 //INPUT
+
+//UTILS 1
+void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list);
+
+//FREE
 void	ft_free_cmdlist(t_commands **cmd);
 
 //CMDSYSTEM
@@ -128,5 +133,7 @@ int	ft_issyscmd(char *cmd, t_env *envp);
 int	ft_strcmp(char *s1, char *s2);
 int	ft_isnonsyscmd(char *arg);
 
+//EXE
+void	ft_cmd_analysis(t_commands *cmd, t_env **env_list);//DA FINIRE
 
 #endif

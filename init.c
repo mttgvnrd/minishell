@@ -106,7 +106,7 @@ void	ft_remove_all_spaces(t_commands *cmd)
     /* Used to check the input and pass it to the parsing and cutting
  functions to get back either a linked list with all the command original
  just one command in a node */ 
-int     ft_parse_init(char *str, t_env **env_lst)
+void     ft_parse_init(char *str, t_env **env_lst)
 {
 	t_commands	*cmd;
 	int		i;
@@ -126,6 +126,6 @@ int     ft_parse_init(char *str, t_env **env_lst)
 		return (ft_free_cmdlist(&cmd));
 	ft_remove_all_spaces(cmd);
 	ft_convertsys(cmd, *env_lst);
-	ft_add_env_lastcmd(cmd, *env_lst);////////
+	ft_add_env_lastcmd(cmd, *env_lst);
 	ft_cmd_analysis(cmd, env_lst);/////////
 }
