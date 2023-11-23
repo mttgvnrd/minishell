@@ -127,5 +127,5 @@ void     ft_parse_init(char *str, t_env **env_lst)
 	ft_remove_all_spaces(cmd);
 	ft_convertsys(cmd, *env_lst);
 	ft_add_env_lastcmd(cmd, *env_lst);
-	ft_cmd_analysis(cmd, env_lst);/////////
+	ft_init_exe(cmd, env_lst);
 }

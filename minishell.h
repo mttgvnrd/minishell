@@ -22,6 +22,8 @@
 # include <readline/history.h>
 # include <fcntl.h>
 # include <termios.h>
+# include <errno.h>
+
 
 
 # define INPUT 1
@@ -34,6 +36,8 @@ typedef struct s_env
     char    *var;
     char    *value;
     int     index;
+    int     exit_status;
+    int     custom;
     struct s_env    *next;
 } t_env;
 
@@ -134,6 +138,13 @@ int	ft_strcmp(char *s1, char *s2);
 int	ft_isnonsyscmd(char *arg);
 
 //EXE
-void	ft_cmd_analysis(t_commands *cmd, t_env **env_list);//DA FINIRE
+void	ft_init_exe(t_commands *cmd, t_env **env_list);
+
+//HEREDOC
+int	ft_here_doc(char **hdocs_end, t_commands *cmd);
+int	ft_read_hdocs(char *hdocs_end);
+
+//FD REDIR
+
 
 #endif
