@@ -67,7 +67,7 @@ char    *ft_cut(char *input, int *index)
     return(str);
 }
 
-char    ft_split_input(char *input)
+char    **ft_split_input(char *input)
 {
     int     i;
     int     count;

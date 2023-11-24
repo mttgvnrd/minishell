@@ -25,7 +25,7 @@
 # include <errno.h>
 
 
-
+# define READ 0
 # define INPUT 1
 # define HEREDOC 2
 # define OUTPUT 4
@@ -52,10 +52,18 @@ typedef struct s_commands
     int     input;
     int     output;
     int     redirect;
-    struct s_env    *next;
+    struct s_commands    *next;
 
 
 }   t_commands;
+
+typedef struct s_exe
+{
+    int     pipe1[2];
+    int     pipe2[2];
+
+}   t_exe;
+
 
 typedef struct s_main
 {
@@ -96,7 +104,7 @@ int     ft_count_lines(int fd);
 
 //PARSING
 t_commands	*ft_check_input(char *str, t_env *env_lst);
-char    ft_split_input(char *input);
+char    **ft_split_input(char *input);
 char    *ft_cut(char *input, int *index);
 t_commands	*ft_cmd_analyze(t_commands *cmd, char **full_cmds, t_env *env_list);
 //////////////////////////////////////////DA FINIRE
@@ -121,6 +129,7 @@ int		ft_set_terminal(void);
 
 //UTILS 1
 void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list);
+char	**ft_check_args(char *arg, char **cmd_args);
 
 //FREE
 void	ft_free_cmdlist(t_commands **cmd);
@@ -129,7 +138,7 @@ void	ft_free_cmdlist(t_commands **cmd);
 void	ft_convertsys(t_commands *cmd, t_env *envp);
 char	**ft_getpath(t_env *envp);
 int	    ft_checkpath(char *command, char **paths);
-char	*ft_crate_path(char *path, char *command);
+char	*ft_create_path(char *path, char *command);
 
 //SYS UTILS
 
@@ -140,11 +149,26 @@ int	ft_isnonsyscmd(char *arg);
 //EXE
 void	ft_init_exe(t_commands *cmd, t_env **env_list);
 
+//CHILD EXE
+
 //HEREDOC
 int	ft_here_doc(char **hdocs_end, t_commands *cmd);
 int	ft_read_hdocs(char *hdocs_end);
 
 //FD REDIR
+void	ft_infile_fd(t_commands *cmd);
+void	ft_outfile_fd(t_commands *cmd, char *to_file, int redirect);
+void	ft_execute_redirection(t_commands *cmd);
 
+//MANAGE REDIR / MANAGE REDIR1
+char	*ft_add_io_file(char *old_file, char *new_file, int len);
+char	**ft_many_redirect(char **old_files, char *new_file, int len);
+void	ft_arrange_table(char **table, int index, int len);
+int	    ft_add_redirection(char **table, t_commands *cmd, int index, int len);
+int	    ft_get_redirection(char *in_put);
+int	    ft_check_redirect(t_commands *cmd, char **cmd_table);
+
+//PIPE
+void	set_in_fd(t_execute *exec_data, int fd);
 
 #endif

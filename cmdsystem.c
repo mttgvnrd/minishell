@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
-char	*ft_crate_path(char *path, char *command)
+char	*ft_create_path(char *path, char *command)
 //costruisce il percorso completo di un comando
 // combinando un percorso e un comando
 {
@@ -36,7 +37,7 @@ int	ft_checkpath(char *command, char **paths)
 		return (-1);
 	while (paths[i])
 	{
-		pathcommand = ft_mkpathcommand(paths[i], command);
+		pathcommand = ft_create_path(paths[i], command);
 		if (access(pathcommand, X_OK) == 0)
 			return (free(pathcommand), i);
 		free(pathcommand);

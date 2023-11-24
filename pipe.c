@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe.c                                              :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgiovana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:49:50 by mgiovana          #+#    #+#             */
-/*   Updated: 2023/11/23 12:10:14 by mgiovana         ###   ########.fr       */
+/*   Created: 2023/11/24 15:18:04 by mgiovana          #+#    #+#             */
+/*   Updated: 2023/11/24 15:18:07 by mgiovana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_init_exe(t_commands *cmd, t_env **env_list)
-//analisi dei comandi della lista di strutture t_commands
-//ed inizio esecuzione
+void	set_in_fd(t_execute *exec_data, int fd)
 {
-	t_commands	*tmp;
-
-	cmd->input = STDIN_FILENO;
-	cmd->output = STDOUT_FILENO;
-	tmp = cmd;
-	while (tmp)
-	{
-		ft_execute_redirection(tmp);
-		tmp = tmp->next;
-	}
-	executor(cmd, *env_list);////
-	ft_free_cmdlist(&cmd);
+	exec_data->pipe2[READ] = fd;
+	exec_data->pipe1[READ] = -1;
 }

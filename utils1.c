@@ -36,3 +36,13 @@ void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list)
 		tmp_env = tmp_env->next;
 	}
 }
+
+char	**ft_check_args(char *arg, char **cmd_args)
+{
+	if (!arg)
+	{
+		free(cmd_args);
+		return (NULL);
+	}
+	return (cmd_args);
+}

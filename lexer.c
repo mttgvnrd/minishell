@@ -96,7 +96,7 @@ char	*ft_token(char *str, char *in_put, int *index, t_env *env_list)
 			str = ft_strjoin_free(str, ft_substr(&in_put[cnt], 0, 1));
 		cnt ++;
 	}
-	cnt += ft_isnspace_indx(&in_put[cnt]) - 1; //here
+	cnt += ft_skip_spaces(&in_put[cnt]) - 1;
 	*index = cnt;
 	return (str);
 }
