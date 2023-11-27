@@ -26,6 +26,8 @@
 
 
 # define READ 0
+# define WRITE 1
+
 # define INPUT 1
 # define HEREDOC 2
 # define OUTPUT 4
@@ -54,8 +56,15 @@ typedef struct s_commands
     int     redirect;
     struct s_commands    *next;
 
-
 }   t_commands;
+
+typedef struct s_pid
+{
+    pid_t       pid;
+    struct s_pid    *next;
+    int     pipe_shift;
+}   t_pid;
+
 
 typedef struct s_exe
 {
@@ -149,7 +158,11 @@ int	ft_isnonsyscmd(char *arg);
 //EXE
 void	ft_init_exe(t_commands *cmd, t_env **env_list);
 
-//CHILD EXE
+//Executor 1
+void	executor(t_commands *cmd, t_env *env_list);
+void	execute_command(t_commands *current_cmd, t_exe *exec_data, t_env *env_list, t_pid **pids);
+int 	wait_for_child_processes(t_pid	*pids, int	*exit_status);
+void	add_pid_to_list(pid_t pid, t_pid **pids);
 
 //HEREDOC
 int	ft_here_doc(char **hdocs_end, t_commands *cmd);
@@ -169,6 +182,15 @@ int	    ft_get_redirection(char *in_put);
 int	    ft_check_redirect(t_commands *cmd, char **cmd_table);
 
 //PIPE
-void	set_in_fd(t_execute *exec_data, int fd);
+void	set_in_fd(t_exe *exec_data, int fd);
+void	initiate_pipe(t_exe *exec_data);
+void	set_out_fd(t_exe *exec_data, int fd);
+void	rotator(t_exe *exec_data);
+
+///BUILTIN
+int	is_builtin(t_commands *cmd);
+int	check_or_exec_builtin(t_commands *cmd, t_exe *exec_data, t_env *env_list);
+static void	dup_pipe(t_exe *exec_data, int *original_input, int *original_output)
+
 
 #endif

@@ -12,8 +12,36 @@
 
 #include "minishell.h"
 
-void	set_in_fd(t_execute *exec_data, int fd)
+void	set_in_fd(t_exe *exec_data, int fd)
+//imposta l'input del processo figlio attraverso la pipe.
 {
 	exec_data->pipe2[READ] = fd;
 	exec_data->pipe1[READ] = -1;
+}
+
+void	initiate_pipe(t_exe *exec_data)
+//Se pipe_shift è 0, inizializza pipe2; altrimenti, inizializza pipe1.
+{
+	if (exec_data->pipe_shift == 0)
+		pipe(exec_data->pipe2);
+	else
+		pipe(exec_data->pipe1);
+}
+
+void	set_out_fd(t_exe *exec_data, int fd)
+//imposta l'output del processo figlio attraverso la pipe
+{
+	if (exec_data->pipe_shift == 0)
+		exec_data->pipe2[WRITE] = fd;
+	else
+		exec_data->pipe1[WRITE] = fd;
+}
+
+void	rotator(t_exe *exec_data)
+// Ruota l'indicatore pipe_shift tra 0 e 1
+{
+	if (exec_data->pipe_shift == 0)
+		exec_data->pipe_shift = 1;
+	else
+		exec_data->pipe_shift = 0;
 }
