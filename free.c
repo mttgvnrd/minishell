@@ -12,8 +12,8 @@
 
 #include "minishell.h"
 
-void	ft_free_cmdlist(t_commands **cmd)
 //libera la struttura t_commands
+void	ft_free_cmdlist(t_commands **cmd)
 {
 	t_commands	*cpy;
 

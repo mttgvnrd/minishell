@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list)
 //assicura che la variabile d'ambiente _ rifletta 
 //sempre l'ultimo comando eseguito nel programma.
+void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list)
 {
 	t_env	*tmp_env;
 	t_commands	*tmp_cmd;

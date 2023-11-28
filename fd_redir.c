@@ -26,8 +26,8 @@ void	ft_infile_fd(t_commands *cmd)
 		cmd->input = open(cmd->from_file, O_RDONLY);
 }
 
-void	ft_outfile_fd(t_commands *cmd, char *to_file, int redirect)
 //impostare correttamente il file descriptor di output per un comando
+void	ft_outfile_fd(t_commands *cmd, char *to_file, int redirect)
 {
 	int     flag;
 
@@ -45,9 +45,9 @@ void	ft_outfile_fd(t_commands *cmd, char *to_file, int redirect)
 		cmd->output = open(to_file, O_RDWR | O_CREAT | flag, 0666);
 }
 
-void	ft_execute_redirection(t_commands *cmd)
 //agisce come coordinatore per le diverse fasi 
 //di gestione della redirezione del comando
+void	ft_execute_redirection(t_commands *cmd)
 {
 	int count;
 

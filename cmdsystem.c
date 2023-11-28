@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-char	*ft_create_path(char *path, char *command)
 //costruisce il percorso completo di un comando
 // combinando un percorso e un comando
+char	*ft_create_path(char *path, char *command)
 {
 	char	*temp;
 	char	*out;
@@ -25,9 +25,9 @@ char	*ft_create_path(char *path, char *command)
 	return (out);
 }
 
-int	ft_checkpath(char *command, char **paths)
 //cerca il comando in una lista di percorsi e verifica se 
 // e accessibile
+int	ft_checkpath(char *command, char **paths)
 {
 	int		i;
 	char	*pathcommand;
@@ -46,8 +46,8 @@ int	ft_checkpath(char *command, char **paths)
 	return (-1);
 }
 
-char	**ft_getpath(t_env *envp)
 //cerca PATH nelle variabili di ambiente e lo copia
+char	**ft_getpath(t_env *envp)
 {
 	t_env	*tmp;
 	char	**out;
@@ -68,9 +68,9 @@ char	**ft_getpath(t_env *envp)
 	return (NULL);
 }
 
-void	ft_create_fullcmd(t_commands *cmd)
 //costruisce un array di stringhe contenente il comando 
 //principale e i suoi argomenti
+void	ft_create_fullcmd(t_commands *cmd)
 {
 	char	**full_cmd;
 	int		count;
@@ -97,9 +97,9 @@ void	ft_create_fullcmd(t_commands *cmd)
 	}
 }
 
-void	ft_convertsys(t_commands *cmd, t_env *envp)
 //verifica se ciascun comando è di sistema o meno, e se è 
 //di sistema, sostituisce il comando con il percorso completo
+void	ft_convertsys(t_commands *cmd, t_env *envp)
 {
 	char    **paths;
 	int		path_num;

@@ -23,9 +23,13 @@
 # include <fcntl.h>
 # include <termios.h>
 # include <errno.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-
+//Pipe action
 # define READ 0
+//Pipe action
 # define WRITE 1
 
 # define INPUT 1
@@ -62,7 +66,6 @@ typedef struct s_pid
 {
     pid_t       pid;
     struct s_pid    *next;
-    int     pipe_shift;
 }   t_pid;
 
 
@@ -70,7 +73,8 @@ typedef struct s_exe
 {
     int     pipe1[2];
     int     pipe2[2];
-
+    int		trigger;
+    int     pipe_shift; 
 }   t_exe;
 
 
@@ -160,8 +164,8 @@ void	ft_init_exe(t_commands *cmd, t_env **env_list);
 
 //Executor 1
 void	executor(t_commands *cmd, t_env *env_list);
-void	execute_command(t_commands *current_cmd, t_exe *exec_data, t_env *env_list, t_pid **pids);
-int 	wait_for_child_processes(t_pid	*pids, int	*exit_status);
+//void	execute_command(t_commands *current_cmd, t_exe *exec_data, t_env *env_list, t_pid **pids);
+int 	ft_child_processes(t_pid	*pids, int	*exit_status);
 void	add_pid_to_list(pid_t pid, t_pid **pids);
 
 //HEREDOC
@@ -190,7 +194,10 @@ void	rotator(t_exe *exec_data);
 ///BUILTIN
 int	is_builtin(t_commands *cmd);
 int	check_or_exec_builtin(t_commands *cmd, t_exe *exec_data, t_env *env_list);
-static void	dup_pipe(t_exe *exec_data, int *original_input, int *original_output)
+
+//FORK
+void	dup2_and_close(int from, int to);
+int	fork_process(t_commands	*cmd, t_exe *exec_data, t_env *env_list);
 
 
 #endif

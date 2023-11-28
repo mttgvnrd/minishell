@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-//STUDIA TUTTO
-void	add_pid_to_list(pid_t pid, t_pidNODE **pids)
-{
-	t_pidNODE	*new_node;
-	t_pidNODE	*temp;
 
-	new_node = malloc(sizeof(t_pidNODE));
+// Funzione per aggiungere un PID alla lista di PID
+void	add_pid_to_list(pid_t pid, t_pid **pids)
+{
+	t_pid	*new_node;
+	t_pid	*temp;
+
+	new_node = malloc(sizeof(t_pid));
 	if (new_node == NULL)
 	{
 		perror("malloc");
@@ -36,11 +37,12 @@ void	add_pid_to_list(pid_t pid, t_pidNODE **pids)
 	}
 }
 
+//Esegue il comando
 void	execute_command(t_commands *current_cmd, t_exe *exec_data,
-						t_env *env_list, t_pidNODE **pids)
+						t_env *env_list, t_pid **pids)
 {
 	pid_t	pid;
-	t_cmds	*cmd;
+	t_commands	*cmd;
 
 	if (exec_data->trigger == 0)
 	{
@@ -64,9 +66,13 @@ void	execute_command(t_commands *current_cmd, t_exe *exec_data,
 	rotator(exec_data);
 }
 
-//int	wait_for_child_processes(t_pidNODE	*pids, int	*exit_status)
+//Funzione per aspettare il termine dei processi figli
+//WIFEXITED(status): Restituisce un valore diverso da zero se il processo figlio è terminato normalmente
+//WIFSIGNALED(status): Restituisce un valore diverso da zero se il processo figlio è terminato a causa di un segnale.
+//WTERMSIG(status) + 128 rappresenta il numero del segnale che ha causato la terminazione del processo.
+int	ft_child_processes(t_pid *pids, int	*exit_status)
 {
-	t_pidNODE	*temp;
+	t_pid	*temp;
 	int			status;
 	pid_t		terminated_pid;
 
@@ -91,11 +97,12 @@ void	execute_command(t_commands *current_cmd, t_exe *exec_data,
 	return (*exit_status);
 }
 
+//Funzione principale che esegue i comandi della SHELL
 void	executor(t_commands *cmd, t_env *env_list)
 {
-	t_exec		exec_data;
-	t_cmds		*current_command;
-	t_pidNODE	*pids;
+	t_exe		exec_data;
+	t_commands		*current_command;
+	t_pid	*pids;
 	int			exit_status;
 
 	exit_status = 0;
@@ -111,5 +118,5 @@ void	executor(t_commands *cmd, t_env *env_list)
 		current_command = current_command->next;
 		env_list->exit_status = exit_status;
 	}
-	env_list->exit_status = wait_for_child_processes(pids, &exit_status);
+	env_list->exit_status = ft_child_processes(pids, &exit_status);
 }

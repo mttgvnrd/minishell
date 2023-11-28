@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-void	ft_init_exe(t_commands *cmd, t_env **env_list)
 //analisi dei comandi della lista di strutture t_commands
 //ed inizio esecuzione
+void	ft_init_exe(t_commands *cmd, t_env **env_list)
 {
 	t_commands	*tmp;
 
