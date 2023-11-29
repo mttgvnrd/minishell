@@ -122,7 +122,7 @@ void     ft_parse_init(char *str, t_env **env_lst)
 		printf("minihell: syntax error near unexpected token `%s' \n", str);
 		return ;
 	}
-	if (!cmd->cmd || (!strlen(cmd->cmd)) | ft_check_list(cmd))//////////
+	if (!cmd->cmd || (!strlen(cmd->cmd)) | ft_check_list(cmd))
 		return (ft_free_cmdlist(&cmd));
 	ft_remove_all_spaces(cmd);
 	ft_convertsys(cmd, *env_lst);

@@ -114,6 +114,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
     signal(SIGINT, ft_ctrl_ingore);
+	signal(SIGQUIT, SIG_IGN);
 	if (ft_set_terminal())
 		exit(1);
 	ft_init_shell(env);
