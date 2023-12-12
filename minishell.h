@@ -139,7 +139,6 @@ int	    ft_check_list(t_commands *cmd);
 void    ft_ctrl_ingore(int sig);
 int		ft_set_terminal(void);
 
-//INPUT
 
 //UTILS 1
 void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list);
@@ -162,6 +161,7 @@ int	ft_isnonsyscmd(char *arg);
 
 //EXE
 void	ft_init_exe(t_commands *cmd, t_env **env_list);
+int	    ft_execute_buildin(t_commands *cmd, t_env **env_list);
 
 //Executor 1
 void	executor(t_commands *cmd, t_env *env_list);

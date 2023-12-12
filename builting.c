@@ -26,6 +26,9 @@ int	is_builtin(t_commands *cmd)
 	return (0);
 }
 
+//si occupa di impostare correttamente i descrittori di file prima dell'esecuzione
+// di un comando quando vengono utilizzate pipe, garantendo che l'input
+// e l'output siano instradati in modo appropriato tra i processi coinvolti.
 static void	dup_pipe(t_exe *exec_data,
 						int *original_input, int *original_output)
 {
@@ -59,7 +62,7 @@ int	check_or_exec_builtin(t_commands *cmd, t_exe *exec_data, t_env *env_list)
 	original_input = -1;
 	original_output = -1;
 	dup_pipe(exec_data, &original_input, &original_output);
-	env_list->exit_status = ft_execute_buildin(cmd, &env_list);//////////
+	env_list->exit_status = ft_execute_buildin(cmd, &env_list);
 	if (original_input > -1)
 		dup2_and_close(original_input, STDIN_FILENO);
 	if (original_output > 1)
