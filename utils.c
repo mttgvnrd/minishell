@@ -12,27 +12,6 @@
 
 #include "minishell.h"
 
-/*char    **dup_array(const char *array)
-{
-    char    **clone;
-    int     i;
-
-    i = 0;
-    while(array[i] != NULL)
-        i++;
-    clone = malloc(sizeof(char *) * (i + 1));
-    i = 0;
-    if (clone != NULL)
-    {
-        while (array[i] != '\0')
-        {
-            clone[i] = ft_strdup(array[i]);
-            i++;
-        }
-    }
-    return(clone);
-}*/
-
 /* rialloca memoria per la stringa a doppio puntatore */
 char	**ft_double_realloc(char **str, int old_size, int new_size)
 {
@@ -110,24 +89,4 @@ void    ctrl_1(int sig)
 	else
 		new.c_lflag &= ~ECHOCTL;
 	tcsetattr(0, TCSANOW, &new);
-}
-
-int     ft_count_lines(int fd)
-{
-	int		i;
-	char	*line;
-
-	if (fd < 0)
-		return (-1);
-	i = 1;
-	line = get_next_line(fd);
-	if (!line)
-		return (0);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
-	return (i);
 }

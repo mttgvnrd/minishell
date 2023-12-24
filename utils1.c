@@ -12,31 +12,6 @@
 
 #include "minishell.h"
 
-//assicura che la variabile d'ambiente _ rifletta 
-//sempre l'ultimo comando eseguito nel programma.
-void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list)
-{
-	t_env	*tmp_env;
-	t_commands	*tmp_cmd;
-
-	tmp_env = env_list;
-	tmp_cmd = cmd;
-	while (tmp_env)
-	{
-		if (!ft_strcmp(tmp_env->var, "_"))
-		{
-			if (tmp_env->value)
-				free(tmp_env->value);
-			if (tmp_cmd->next)
-				tmp_env->value = ft_calloc(1, sizeof(char));
-			else
-				tmp_env->value = ft_strdup(cmd->cmd);
-			return ;
-		}
-		tmp_env = tmp_env->next;
-	}
-}
-
 char	**ft_check_args(char *arg, char **cmd_args)
 {
 	if (!arg)
@@ -45,4 +20,42 @@ char	**ft_check_args(char *arg, char **cmd_args)
 		return (NULL);
 	}
 	return (cmd_args);
+}
+
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (src[i] != '\0' && i < n)
+	{
+		dest[i] = src[i];
+		++i;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
+}
+
+int     ft_count_lines(int fd)
+{
+	int		i;
+	char	*line;
+
+	if (fd < 0)
+		return (-1);
+	i = 1;
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
+	return (i);
 }

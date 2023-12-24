@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-# include <unistd.h>
 
 void	dup2_and_close(int from, int to)
 {
@@ -26,7 +25,7 @@ static void	execute_command(t_commands *cmd, t_env *env_list)
 {
 	if (!access(cmd->cmd, X_OK))
 		execve(cmd->cmd, cmd->full_cmd,
-			ft_create_env_array(env_list));/////////////////
+			ft_create_env_array(env_list));
 	else
 		printf("%s: command not found\n", cmd->cmd);
 }

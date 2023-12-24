@@ -45,7 +45,6 @@ int		ft_open_quotes(char *input)
 }
 
 void	ft_free_envlist(t_env **env_list)
-//studia
 {
 	t_env	*tmp;
 
@@ -63,7 +62,6 @@ void	ft_free_envlist(t_env **env_list)
 }
 
 void	ft_exit_minihell(t_commands *cmd, t_env *env_list)
-//studia
 {
 	int	exitcode;
 

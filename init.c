@@ -53,7 +53,7 @@ t_env  *ft_get_env(char **env)
     return (head);
 }
 
-//Questa funzione verifica se ci sono comandi vuoti nella lista di comandi (t_commands).
+//verifica se ci sono comandi vuoti nella lista di comandi (t_commands).
 int	ft_check_list(t_commands *cmd)
 {
 	t_commands	*tmp;
@@ -66,23 +66,6 @@ int	ft_check_list(t_commands *cmd)
 		tmp = tmp->next;
 	}
 	return (0);
-}
-
-void	ft_remove_spaces(char **str)
-{
-	int		count2;
-	char	*tmp;
-
-	count2 = 0;
-	while (!ft_isascii(str[0][count2]) || str[0][count2] == ' '
-		|| str[0][count2] == '\t' || str[0][count2] == '\v')
-		count2 ++;
-	if (count2)
-	{
-		tmp = ft_strdup(&str[0][count2]);
-		free(str[0]);
-		str[0] = tmp;
-	}
 }
 
 //serve per rimuovere spazi in eccesso all'inizio 

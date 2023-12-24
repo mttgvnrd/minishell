@@ -41,7 +41,6 @@ t_commands *ft_parser(char **array_cmds)
 	return (cmd);
 }
 
-
 char    *ft_cut(char *input, int *index)
 {
     int     count;

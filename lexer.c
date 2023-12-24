@@ -13,8 +13,9 @@
 
 #include "minishell.h"
 
+//Cerca la variabile d'ambiente corrispondente nella lista delle variabili d'ambiente
+//Se la trova, restituisce il suo valore. Se non la trova, restituisce una stringa vuota
 char	*ft_expansion(char *str, t_env *env_list)
-//studia
 {
 	t_env	*tmp;
 
@@ -41,8 +42,8 @@ char	*ft_expansion(char *str, t_env *env_list)
 	return (ft_strdup(""));
 }
 
+//estrae e restituisce il valore di una variabile d'ambiente dalla stringa di input
 char	*ft_getenv_var(char *in_put, int *index, t_env *env_list)
-//studia
 {
 	char	*str;
 	int		count;
@@ -56,8 +57,8 @@ char	*ft_getenv_var(char *in_put, int *index, t_env *env_list)
 	return (ft_expansion(str, env_list));
 }
 
+//gestisce la parte di una stringa racchiusa tra virgolette singole o doppie
 char	*ft_inside_qoutes(char *str, char *in_put, int *index, t_env *env_list)
-//studia
 {
 	char	*tmp;
 	char	divid;
@@ -79,8 +80,8 @@ char	*ft_inside_qoutes(char *str, char *in_put, int *index, t_env *env_list)
 	return (str);
 }
 
+//estrase il token all interno della stringa di input
 char	*ft_token(char *str, char *in_put, int *index, t_env *env_list)
-//studia
 {
 	int		cnt;
 
@@ -101,8 +102,9 @@ char	*ft_token(char *str, char *in_put, int *index, t_env *env_list)
 	return (str);
 }
 
+//tokenizza l'intera stringa di input
+//restituisce l'array cmds, che rappresenta i token dell'input
 char    **ft_lexer(char *input, t_env *env_lst)
-//studia
 {
     int     i;
     int     cnt;
@@ -122,7 +124,7 @@ char    **ft_lexer(char *input, t_env *env_lst)
 			str = ft_strjoin_free(str, ft_substr(&input[cnt], 0, 1));
 			cnt ++;
 		}
-		str = ft_token(str, input, &cnt, env_lst);// ft_tokenize
+		str = ft_token(str, input, &cnt, env_lst);
 		cmds[++i] = ft_strdup(str);
 		cmds = ft_double_realloc(cmds, i + 1, i + 2);
 		free(str);

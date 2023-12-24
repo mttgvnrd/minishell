@@ -11,10 +11,11 @@
 # **************************************************************************** #
 
 NAME = minishell
-SRC = 	main.c init.c signal.c utils.c utils1.c sys_utils.c lexer.c \
-		cmdsystem.c parsing.c heredoc.c free.c fd_redir.c \
-		manage_redir1.c manage_redir.c exe.c pipe.c fork.c builting.c\
-		child_exe.c
+SRC = 	main.c init.c init1.c signal.c utils.c utils1.c  lexer.c \
+		cmdsystem.c parsing.c heredoc.c fd_redir.c sys_utils.c \
+		manage_redir1.c manage_redir.c exe.c pipe.c fork.c builtin.c\
+		child_exe.c buildins.c buildins2.c export.c export1.c export2.c \
+		export3.c sys_cmd.c
 OBJ = $(SRC:.c=.o)
 CC = gcc
 RM = rm -f
