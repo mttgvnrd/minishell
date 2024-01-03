@@ -27,6 +27,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <wait.h>
+# include <sys/stat.h>
 
 //Pipe action
 # define READ 0
@@ -101,7 +102,7 @@ typedef struct s_term
     int             status;
 }           t_term;
 
-struct termios g_save_attr;  /* Usato per contollare l input e creare una lista */
+extern struct termios g_save_attr;
 
 // MAIN
 int		ft_open_quotes(char *input);
@@ -155,7 +156,7 @@ int	ft_cmd_size(t_commands *cmd);
 char	**ft_create_env_array(t_env	*env_list);
 //ChildExe
 void	executor(t_commands *cmd, t_env *env_list);
-void	execute_command(t_commands *current_cmd, t_exe *exec_data, t_env *env_list, t_pid **pids);
+void	exe_command(t_commands *current_cmd, t_exe *exec_data, t_env *env_list, t_pid **pids);
 int 	ft_child_processes(t_pid	*pids, int	*exit_status);
 void	add_pid_to_list(pid_t pid, t_pid **pids);
 //HEREDOC
@@ -213,7 +214,7 @@ int	ft_checkforwrongargs(char **args);
 void	ft_setindexprinted(t_env *envp, int index, int *indexprinted);
 //FORK
 void	dup2_and_close(int from, int to);
-int	fork_process(t_commands	*cmd, t_exe *exec_data, t_env *env_list);
+int	    fork_process(t_commands	*cmd, t_exe *exec_data, t_env *env_list);
 //SYS CMD
 void	ft_convertsyscommands(t_commands *cmd, t_env *envp);
 char	**ft_getpaths(t_env *envp);

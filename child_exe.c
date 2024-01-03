@@ -38,7 +38,7 @@ void	add_pid_to_list(pid_t pid, t_pid **pids)
 }
 
 //Esegue il comando
-void	execute_command(t_commands *current_cmd, t_exe *exec_data,
+void	exe_command(t_commands *current_cmd, t_exe *exec_data,
 						t_env *env_list, t_pid **pids)
 {
 	pid_t	pid;
@@ -114,7 +114,7 @@ void	executor(t_commands *cmd, t_env *env_list)
 	exec_data.trigger = 0;
 	while (current_command)
 	{
-		execute_command(current_command, &exec_data, env_list, &pids);
+		exe_command(current_command, &exec_data, env_list, &pids);
 		current_command = current_command->next;
 		env_list->exit_status = exit_status;
 	}

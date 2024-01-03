@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+struct termios g_save_attr;
 // controllo sulle ('') e (""), verifica se ci sono virgolette aperte e non chiuse
 // se close ha un valore vuol dire che non sono state chiuse 
 // le vigolette e quindi stampera un mex di errore
