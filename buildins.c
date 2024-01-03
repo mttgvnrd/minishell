@@ -64,18 +64,24 @@ int	ft_cd(char **args, t_env *envp)
 {
 	struct stat	st;
 	int			chdirrt;
-
+	
 	if (!args || args[0] == NULL)
-		return (printf("cd: expected argument to \"cd\"\n"), 1);
+	{	
+			chdirrt = chdir("HOME");
+			if (chdirrt == -1)
+				return (perror("cd"), 1);
+			else
+				ft_chdir_envp(envp);
+	}	
 	else
 	{
 		if (stat(args[0], &st) != 0)
 		{
-			return (printf("bash: cd: %s: No such file or directory\n",
+			return (printf("cd: No such file or directory: %s\n",
 					args[0]), 1);
 		}
 		else if (!S_ISDIR(st.st_mode))
-			return (printf("bash: cd: %s: Not a directory\n", args[0]), 1);
+			return (printf("cd: %s: Not a directory\n", args[0]), 1);
 		else
 		{
 			chdirrt = chdir(args[0]);
