@@ -64,15 +64,20 @@ int	ft_cd(char **args, t_env *envp)
 {
 	struct stat	st;
 	int			chdirrt;
+	const char	*home;
 	
 	if (!args || args[0] == NULL)
 	{	
-			chdirrt = chdir("HOME");
+			home = getenv("HOME");
+			if (home == NULL)
+				return (perror("cd"), 1);
+			chdirrt = chdir(home);
 			if (chdirrt == -1)
 				return (perror("cd"), 1);
 			else
 				ft_chdir_envp(envp);
 	}	
+	
 	else
 	{
 		if (stat(args[0], &st) != 0)
@@ -118,7 +123,7 @@ int	ft_echo(char **args)
 
 	i = 0;
 	nl = 1;
-	if (!args)
+	if (!args || args[0] == NULL)
 	{
 		printf("\n");
 		return (0);
@@ -137,5 +142,5 @@ int	ft_echo(char **args)
 	}
 	if (nl == 1)
 		printf("\n");
-	return (0);
+	return(0);
 }
