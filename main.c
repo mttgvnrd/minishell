@@ -16,6 +16,7 @@ struct termios g_save_attr;
 // controllo sulle ('') e (""), verifica se ci sono virgolette aperte e non chiuse
 // se close ha un valore vuol dire che non sono state chiuse 
 // le vigolette e quindi stampera un mex di errore
+
 int		ft_open_quotes(char *input)
 {
 	char	divid;
@@ -26,6 +27,7 @@ int		ft_open_quotes(char *input)
 	close = 0;
 	while (input[++index])
 	{
+		
 		if (input[index] == '"' || input[index] == '\'')
 		{
 			if (!close)
