@@ -125,7 +125,11 @@ char    **ft_lexer(char *input, t_env *env_lst)
 			cnt ++;
 		}
 		str = ft_token(str, input, &cnt, env_lst);
-		cmds[++i] = ft_strdup(str);
+		i++;
+		if (input[i] == '"' && input[i + i] == '"')
+			cmds[i] = ft_strdup(" ");
+		else
+			cmds[i] = ft_strdup(str);//////////////
 		cmds = ft_double_realloc(cmds, i + 1, i + 2);
 		free(str);
 	}

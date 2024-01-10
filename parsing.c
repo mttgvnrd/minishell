@@ -15,6 +15,7 @@
 // alloca memoria per una nuova struttura t_commands rappresentante un comando. 
 //In seguito, copia il nome del comando e gli argomenti dall'array 
 //array_cmds nella nuova struttura commands
+
 t_commands *ft_parser(char **array_cmds)
 {
 	t_commands	*cmd;
@@ -130,7 +131,7 @@ t_commands	*ft_check_input(char *str, t_env *env_lst)
     i = 0;
     array_cmds = ft_split_input(str);
     while (array_cmds[len])
-        len++;
+	    len++;
     cmd = ft_parser(ft_lexer(array_cmds[i], env_lst));
     if (len > 1)
         cmd = ft_cmd_analyze(cmd, array_cmds, env_lst);
