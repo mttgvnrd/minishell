@@ -119,19 +119,50 @@ char    **ft_lexer(char *input, t_env *env_lst)
     while (input[++cnt])
     {
         str = NULL;
-        while (input[cnt] && (input[cnt] == '<' || input[cnt] == '>'))
+   		while (input[cnt] && (input[cnt] == '<' || input[cnt] == '>'))
+			{
+				str = ft_strjoin_free(str, ft_substr(&input[cnt], 0, 1));
+				cnt ++;
+			}
+		str = ft_token(str, input, &cnt, env_lst);
+		i++;
+	//	printf("%s , %d\n", str, i);
+		if (str)
+			cmds[i] = ft_strdup(str);
+		else
+			cmds[i] = ft_strdup(" ");
+		cmds = ft_double_realloc(cmds, i + 1, i + 2);
+		free(str);
+	}
+	return (cmds); 
+}
+	   
+       // if (str[0] == '"' && str[1] == '"' && str[2] == '\0')
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	    /*while (input[cnt] && (input[cnt] == '<' || input[cnt] == '>'))
 		{
 			str = ft_strjoin_free(str, ft_substr(&input[cnt], 0, 1));
 			cnt ++;
 		}
 		str = ft_token(str, input, &cnt, env_lst);
 		i++;
-		if (input[i] == '"' && input[i + i] == '"')
+		printf("%s, %d\n", str, i);
+        if (str[0] == '"' && str[1] == '"' && str[2] == '\0')
 			cmds[i] = ft_strdup(" ");
 		else
 			cmds[i] = ft_strdup(str);//////////////
-		cmds = ft_double_realloc(cmds, i + 1, i + 2);
+		printf("456\n");
+		cmds = ft_double_realloc(cmds, i + 1, i + 2);				
 		free(str);
+		printf("00\n");
 	}
 	return (cmds);
-}    
+}    */

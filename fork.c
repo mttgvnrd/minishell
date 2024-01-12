@@ -22,7 +22,10 @@ void	dup2_and_close(int from, int to)
 }
 
 static void	execute_command(t_commands *cmd, t_env *env_list)
-{
+{	
+	//printf("%s\n", cmd->cmd);
+	//if (cmd->cmd[18] == '\0')
+	//	printf(": command not found\n");
 	if (!access(cmd->cmd, X_OK))
 		execve(cmd->cmd, cmd->full_cmd,
 			ft_create_env_array(env_list));
