@@ -29,9 +29,9 @@ void	ft_infile_fd(t_commands *cmd)
 //impostare correttamente il file descriptor di output per un comando
 void	ft_outfile_fd(t_commands *cmd, char *to_file, int redirect)
 {
-	int     flag;
+	int	flag;
 
-    flag = 0;
+	flag = 0;
 	cmd->output = STDOUT_FILENO;
 	if (redirect & OUTPUT)
 		flag |= O_TRUNC;
@@ -49,9 +49,9 @@ void	ft_outfile_fd(t_commands *cmd, char *to_file, int redirect)
 //di gestione della redirezione del comando
 void	ft_execute_redirection(t_commands *cmd)
 {
-	int count;
+	int	count;
 
-    count = -1;
+	count = -1;
 	if ((cmd->redirect & INPUT))
 		ft_infile_fd(cmd);
 	if ((cmd->redirect & HEREDOC))

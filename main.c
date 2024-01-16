@@ -113,6 +113,7 @@ int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
+	rl_catch_signals = 0;
 	signal(SIGINT, ft_ctrl_ingore);
 	signal(SIGQUIT, SIG_IGN);
 	if (ft_set_terminal())

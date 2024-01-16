@@ -129,8 +129,8 @@ int	ft_echo(char **args)
 			printf("%s", args[i++]);
 		else
 			printf("%s ", args[i++]);
-	}	
+	}
 	if (nl == 1)
 		printf("\n");
-	return(0);
+	return (0);
 }

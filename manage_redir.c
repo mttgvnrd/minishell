@@ -72,14 +72,14 @@ int	ft_add_redirection(char **table, t_commands *cmd, int index, int len)
 			table[index][count] == '>'))
 		count ++;
 	if (count != len)
-		return (printf("%s `%c'\n", Mex, table[index][0]), 1);
+		return (printf("%s `%c'\n", MEX, table[index][0]), 1);
 	if (!table[index][len])
 	{
 		len = 0;
 		index ++;
 	}
 	if (!table[index])
-		return (printf("%s `newline'\n", Mex), 1);
+		return (printf("%s `newline'\n", MEX), 1);
 	if ((redirect & INPUT) == INPUT)
 		cmd->from_file = ft_add_io_file(cmd->from_file, table[index], len);
 	else if ((redirect & HEREDOC) == HEREDOC)

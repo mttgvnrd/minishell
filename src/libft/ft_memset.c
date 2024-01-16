@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<string.h>
-#include<unistd.h>
-#include<stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
 
 void	*ft_memset(void *str, int c, size_t mod)
 {

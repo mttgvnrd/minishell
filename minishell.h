@@ -29,8 +29,7 @@
 # include <wait.h>
 # include <sys/stat.h>
 
-
-# define Mex "minishell: syntax error near unexpected token"
+# define MEX "minishell: syntax error near unexpected token"
 //Pipe action
 # define READ 0
 //Pipe action
