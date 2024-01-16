@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-//Cerca la variabile d'ambiente corrispondente nella lista delle variabili d'ambiente
-//Se la trova, restituisce il suo valore. Se non la trova, restituisce una stringa vuota
+//Cerca la variabile d'ambiente corrispondente nella lista 
+//delle variabili d'ambiente Se la trova, restituisce il suo valore.
+// Se non la trova, restituisce una stringa vuota
 char	*ft_expansion(char *str, t_env *env_list)
 {
 	t_env	*tmp;
@@ -42,7 +42,8 @@ char	*ft_expansion(char *str, t_env *env_list)
 	return (ft_strdup(""));
 }
 
-//estrae e restituisce il valore di una variabile d'ambiente dalla stringa di input
+//estrae e restituisce il valore di una variabile 
+//d'ambiente dalla stringa di input
 char	*ft_getenv_var(char *in_put, int *index, t_env *env_list)
 {
 	char	*str;
@@ -104,29 +105,25 @@ char	*ft_token(char *str, char *in_put, int *index, t_env *env_list)
 
 //tokenizza l'intera stringa di input
 //restituisce l'array cmds, che rappresenta i token dell'input
-char    **ft_lexer(char *input, t_env *env_lst)
+char	**ft_lexer(char *input, t_env *env_lst)
 {
-    int     i;
-    int     cnt;
-    char    *str;
-    char    **cmds;
+	int		i;
+	int		cnt;
+	char	*str;
+	char	**cmds;
 
-    i = -1;
-    cnt = -1;
-    cmds = (char **)calloc(1, sizeof(char *));
-    if (!cmds || !input)
-        return (NULL);
-    while (input[++cnt])
-    {
-        str = NULL;
-   		while (input[cnt] && (input[cnt] == '<' || input[cnt] == '>'))
-			{
-				str = ft_strjoin_free(str, ft_substr(&input[cnt], 0, 1));
-				cnt ++;
-			}
+	i = -1;
+	cnt = -1;
+	cmds = (char **)calloc(1, sizeof(char *));
+	if (!cmds || !input)
+		return (NULL);
+	while (input[++cnt])
+	{
+		str = NULL;
+		while (input[cnt] && (input[cnt] == '<' || input[cnt] == '>'))
+			str = ft_strjoin_free(str, ft_substr(&input[cnt++], 0, 1));
 		str = ft_token(str, input, &cnt, env_lst);
 		i++;
-	//	printf("%s , %d\n", str, i);
 		if (str)
 			cmds[i] = ft_strdup(str);
 		else
@@ -134,35 +131,5 @@ char    **ft_lexer(char *input, t_env *env_lst)
 		cmds = ft_double_realloc(cmds, i + 1, i + 2);
 		free(str);
 	}
-	return (cmds); 
-}
-	   
-       // if (str[0] == '"' && str[1] == '"' && str[2] == '\0')
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	    /*while (input[cnt] && (input[cnt] == '<' || input[cnt] == '>'))
-		{
-			str = ft_strjoin_free(str, ft_substr(&input[cnt], 0, 1));
-			cnt ++;
-		}
-		str = ft_token(str, input, &cnt, env_lst);
-		i++;
-		printf("%s, %d\n", str, i);
-        if (str[0] == '"' && str[1] == '"' && str[2] == '\0')
-			cmds[i] = ft_strdup(" ");
-		else
-			cmds[i] = ft_strdup(str);//////////////
-		printf("456\n");
-		cmds = ft_double_realloc(cmds, i + 1, i + 2);				
-		free(str);
-		printf("00\n");
-	}
 	return (cmds);
-}    */
+}

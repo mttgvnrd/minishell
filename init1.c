@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init1.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgiovana <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/16 14:45:32 by mgiovana          #+#    #+#             */
+/*   Updated: 2024/01/16 14:45:38 by mgiovana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_remove_spaces(char **str)
@@ -47,7 +59,7 @@ void	ft_free_cmdlist(t_commands **cmd)
 //sempre l'ultimo comando eseguito nel programma.
 void	ft_add_env_lastcmd(t_commands *cmd, t_env *env_list)
 {
-	t_env	*tmp_env;
+	t_env		*tmp_env;
 	t_commands	*tmp_cmd;
 
 	tmp_env = env_list;

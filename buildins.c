@@ -19,9 +19,9 @@ int	ft_env(t_env *envp)
 	tmp = envp;
 	while (tmp)
 	{
-		if (tmp->var && !tmp->custom && tmp->value)
+		if (tmp->var && tmp->value)
 			printf("%s=%s\n", tmp->var, tmp->value);
-		else if (tmp->var && !tmp->custom && !tmp->value)
+		else if (tmp->var && !tmp->value)
 			printf("%s=\n", tmp->var);
 		if (tmp->next)
 			tmp = tmp->next;
@@ -64,20 +64,10 @@ int	ft_cd(char **args, t_env *envp)
 {
 	struct stat	st;
 	int			chdirrt;
-	const char	*home;
-	
+
+	chdirrt = 0;
 	if (!args || args[0] == NULL)
-	{	
-			home = getenv("HOME");
-			if (home == NULL)
-				return (perror("cd"), 1);
-			chdirrt = chdir(home);
-			if (chdirrt == -1)
-				return (perror("cd"), 1);
-			else
-				ft_chdir_envp(envp);
-	}	
-	
+		ft_go_home(chdirrt, envp);
 	else
 	{
 		if (stat(args[0], &st) != 0)

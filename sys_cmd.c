@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sys_cmd.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgiovana <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/16 17:05:01 by mgiovana          #+#    #+#             */
+/*   Updated: 2024/01/16 17:05:03 by mgiovana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*ft_mkpathcommand(char *path, char *command)
@@ -53,9 +65,9 @@ char	**ft_getpaths(t_env *envp)
 
 void	ft_convertsyscommands(t_commands *cmd, t_env *envp)
 {
-	char	**paths;
-	int		pathnum;
-	char	*temp;
+	char		**paths;
+	int			pathnum;
+	char		*temp;
 	t_commands	*tmp;
 
 	paths = ft_getpaths(envp);

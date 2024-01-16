@@ -41,7 +41,7 @@ void	add_pid_to_list(pid_t pid, t_pid **pids)
 void	exe_command(t_commands *current_cmd, t_exe *exec_data,
 						t_env *env_list, t_pid **pids)
 {
-	pid_t	pid;
+	pid_t		pid;
 	t_commands	*cmd;
 
 	if (exec_data->trigger == 0)
@@ -67,12 +67,15 @@ void	exe_command(t_commands *current_cmd, t_exe *exec_data,
 }
 
 //Funzione per aspettare il termine dei processi figli
-//WIFEXITED(status): Restituisce un valore diverso da zero se il processo figlio è terminato normalmente
-//WIFSIGNALED(status): Restituisce un valore diverso da zero se il processo figlio è terminato a causa di un segnale.
-//WTERMSIG(status) + 128 rappresenta il numero del segnale che ha causato la terminazione del processo.
+//WIFEXITED(status): Restituisce un valore diverso da zero 
+//se il processo figlio è terminato normalmente
+//WIFSIGNALED(status): Restituisce un valore diverso da zero 
+//se il processo figlio è terminato a causa di un segnale.
+//WTERMSIG(status) + 128 rappresenta il numero del segnale 
+//che ha causato la terminazione del processo.
 int	ft_child_processes(t_pid *pids, int	*exit_status)
 {
-	t_pid	*temp;
+	t_pid		*temp;
 	int			status;
 	pid_t		terminated_pid;
 
@@ -101,8 +104,8 @@ int	ft_child_processes(t_pid *pids, int	*exit_status)
 void	executor(t_commands *cmd, t_env *env_list)
 {
 	t_exe		exec_data;
-	t_commands		*current_command;
-	t_pid	*pids;
+	t_commands	*current_command;
+	t_pid		*pids;
 	int			exit_status;
 
 	exit_status = 0;

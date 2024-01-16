@@ -12,12 +12,13 @@
 
 #include "minishell.h"
 
-struct termios g_save_attr;
-// controllo sulle ('') e (""), verifica se ci sono virgolette aperte e non chiuse
+struct termios	g_save_attr;
+// controllo sulle ('') e (""), verifica se
+// ci sono virgolette aperte e non chiuse
 // se close ha un valore vuol dire che non sono state chiuse 
 // le vigolette e quindi stampera un mex di errore
 
-int		ft_open_quotes(char *input)
+int	ft_open_quotes(char *input)
 {
 	char	divid;
 	int		index;
@@ -27,7 +28,6 @@ int		ft_open_quotes(char *input)
 	close = 0;
 	while (input[++index])
 	{
-		
 		if (input[index] == '"' || input[index] == '\'')
 		{
 			if (!close)
@@ -90,7 +90,7 @@ void	ft_exit_minihell(t_commands *cmd, t_env *env_list)
 }
 
 /* Used to display the prompt and read the input from the user */
-int		ft_init_shell(char **env)
+int	ft_init_shell(char **env)
 {
 	char	*str;
 	t_env	*env_lst;
@@ -103,20 +103,19 @@ int		ft_init_shell(char **env)
 			str = (ft_strdup("exit"));
 		add_history(str);
 		if (ft_open_quotes(str))
-			continue;
-		ft_parse_init(ft_strdup(str) , &env_lst);
+			continue ;
+		ft_parse_init(ft_strdup(str), &env_lst);
 		free(str);
 	}
-
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	(void)argc;
 	(void)argv;
-    signal(SIGINT, ft_ctrl_ingore);
+	signal(SIGINT, ft_ctrl_ingore);
 	signal(SIGQUIT, SIG_IGN);
 	if (ft_set_terminal())
 		exit(1);
 	ft_init_shell(env);
-}	
+}

@@ -22,10 +22,7 @@ void	dup2_and_close(int from, int to)
 }
 
 static void	execute_command(t_commands *cmd, t_env *env_list)
-{	
-	//printf("%s\n", cmd->cmd);
-	//if (cmd->cmd[18] == '\0')
-	//	printf(": command not found\n");
+{
 	if (!access(cmd->cmd, X_OK))
 		execve(cmd->cmd, cmd->full_cmd,
 			ft_create_env_array(env_list));
@@ -33,8 +30,10 @@ static void	execute_command(t_commands *cmd, t_env *env_list)
 		printf("%s: command not found\n", cmd->cmd);
 }
 
-// gestisce la duplicazione dei descrittori di file per implementare le pipe.
-//Controlla pipe_shift per determinare quale parte della pipe deve essere duplicata.
+// gestisce la duplicazione dei descrittori 
+//di file per implementare le pipe.
+//Controlla pipe_shift per determinare quale 
+//parte della pipe deve essere duplicata.
 static void	dup_pipe(t_exe *exec_data)
 {
 	if (exec_data->pipe_shift == 0)
@@ -72,10 +71,13 @@ static void	close_pipe(t_exe *exec_data)
 	}
 }
 
-//crea un nuovo processo tramite fork. Nel processo figlio, gestisce la duplicazione 
-//dei descrittori di file per implementare le pipe e poi esegue il comando con execute_command. 
-//Nel processo padre, chiude i descrittori di file associati alle pipe e restituisce il PID del processo figlio.
-int	fork_process(t_commands	*cmd, t_exe *exec_data, t_env *env_list)
+//crea un nuovo processo tramite fork. Nel processo
+// figlio, gestisce la duplicazione 
+//dei descrittori di file per implementare le pipe 
+//e poi esegue il comando con execute_command. 
+//Nel processo padre, chiude i descrittori di 
+//file associati alle pipe e restituisce il PID del processo figlio.
+int	fork_process(t_commands *cmd, t_exe *exec_data, t_env *env_list)
 {
 	int			pid;
 

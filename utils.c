@@ -38,7 +38,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 
 	if (!s1)
 		s1 = (char *)ft_calloc(1, sizeof(char));
-	if (!s1 || !s2)
+	if ((!s1 && s1[1] != '<') || !s2)
 		return (NULL);
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
@@ -53,7 +53,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 }
 
 /* Ignora gli spazi e ritorna il punto in cui non ci sono piu*/
-int	ft_skip_spaces (char *str)
+int	ft_skip_spaces(char *str)
 {
 	int	i;
 
@@ -79,7 +79,7 @@ void	ft_free_double_str(char **str)
 	free(str);
 }
 
-void    ctrl_1(int sig)
+void	ctrl_1(int sig)
 {
 	struct termios	new;
 

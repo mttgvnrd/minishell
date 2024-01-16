@@ -27,11 +27,11 @@ int	ft_read_hdocs(char *hdocs_end)
 	char	*delimiter;
 	int		fd;
 
-	delimiter = ft_strjoin(hdocs_end, "\n"); //dove "finisce" il comando di input
+	delimiter = ft_strjoin(hdocs_end, "\n");
 	fd = open("minhell_tmp.txt", O_RDWR | O_CREAT | O_APPEND, 0666);
 	write(1, "heredoc> ", 9);
 	str = get_next_line(0);
-	while (ft_strcmp(str, delimiter))//finche non e \n
+	while (ft_strcmp(str, delimiter))
 	{
 		write(fd, str, ft_strlen(str));
 		free(str);
@@ -47,14 +47,14 @@ int	ft_read_hdocs(char *hdocs_end)
 
 int	ft_here_doc(char **hdocs_end, t_commands *cmd)
 {
-	int		fd;
-	
-	if (!access("minhell_tmp.txt", F_OK))// Se il file esiste, rimuovilo
+	int		fd;	
+
+	if (!access("minhell_tmp.txt", F_OK))
 		unlink("minhell_tmp.txt");
 	fd = ft_read_hdocs(hdocs_end[0]);
 	close(fd);
 	if (hdocs_end[1])
 		return (-1);
-	cmd->input = open("minhell_tmp.txt", O_RDONLY);	//Imposta il file descriptor di input del comando sulla lettura del file temporaneo
+	cmd->input = open("minhell_tmp.txt", O_RDONLY);
 	return (fd);
 }

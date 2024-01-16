@@ -54,6 +54,10 @@ fclean: clean
 	@make fclean -s -C src/libft
 	@make fclean -s -C src/Printf
 	@make fclean -s -C src/GNL
+	
+mem:
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.supp ./minishell
+    
 
 re: fclean all
 

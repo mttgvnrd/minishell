@@ -14,43 +14,51 @@
 
 //questa funzione crea un nodo della lista concatenata t_env 
 //a partire da una stringa di variabile d'ambiente envp e un indice index.
-t_env  *ft_new_envnode(char *env, int index)
+t_env	*ft_new_envnode(char *env, int index)
 {
-    t_env  *node;
-    char    **c;
+	t_env	*node;
+	char	**c;
 
-    node = (t_env *) calloc(1, sizeof(t_env));
-    if (!node)
-        return(NULL);
-    c = ft_split(env, '=');
-    node->var = ft_strdup(c[0]);
+	node = (t_env *) calloc(1, sizeof(t_env));
+	if (!node)
+		return (NULL);
+	c = ft_split(env, '=');
+	node->var = ft_strdup(c[0]);
 	node->value = ft_strdup(c[1]);
+	if (!node->var || !node->value)
+	{
+		free(node->var);
+		free(node->value);
+		free(node);
+		ft_free_double_str(c);
+		return (NULL);
+	}
 	node->index = index;
 	ft_free_double_str(c);
 	return (node);
 }
 
-// crea una lista concatenata di tipo t_env a partire da un array di
-// stringhe envp, dove ogni elemento dell'array rappresenta una variabile d'ambiente.
-t_env  *ft_get_env(char **env)
+//crea una lista concatenata di tipo t_env a partire da un array di stringhe
+// envp ogni elemento dell'array rappresenta una variabile d'ambiente.
+t_env	*ft_get_env(char **env)
 {
-    int     i;
-    t_env   *head;
-    t_env   *temp;
+	int		i;
+	t_env	*head;
+	t_env	*temp;
 
-    i = 0;
-    head = ft_new_envnode(env[i], i);
-    if (!head)
-        return (NULL);
-    temp = head;
-    while(env[++i])
-    {
-        temp->next = ft_new_envnode(env[i], i);
-        if (!temp)
-            return(NULL);
-        temp = temp->next;
-    }
-    return (head);
+	i = 0;
+	head = ft_new_envnode(env[i], i);
+	if (!head)
+		return (NULL);
+	temp = head;
+	while (env[++i])
+	{
+		temp->next = ft_new_envnode(env[i], i);
+		if (!temp)
+			return (NULL);
+		temp = temp->next;
+	}
+	return (head);
 }
 
 //verifica se ci sono comandi vuoti nella lista di comandi (t_commands).
@@ -86,25 +94,26 @@ void	ft_remove_all_spaces(t_commands *cmd)
 	}
 }
 
-    /* Used to check the input and pass it to the parsing and cutting
- functions to get back either a linked list with all the command original
- just one command in a node */ 
-void     ft_parse_init(char *str, t_env **env_lst)
+/* Used to check the input and pass it to the parsing and cutting
+functions to get back either a linked list with all the command original
+just one command in a node */
+void	ft_parse_init(char *str, t_env **env_lst)
 {
 	t_commands	*cmd;
-	int		i;
+	int			i;
 
 	i = 0;
 	i += ft_skip_spaces(str);
 	if (!str[i])
 		return ;
 	cmd = ft_check_input(&str[i], *env_lst);
-	free(str);
 	if (!cmd)
 	{
 		printf("minihell: syntax error near unexpected token `%s' \n", str);
+		free(str);
 		return ;
 	}
+	free(str);
 	if (!cmd->cmd || (!strlen(cmd->cmd)) | ft_check_list(cmd))
 		return (ft_free_cmdlist(&cmd));
 	ft_remove_all_spaces(cmd);

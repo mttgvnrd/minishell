@@ -40,7 +40,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-int     ft_count_lines(int fd)
+int	ft_count_lines(int fd)
 {
 	int		i;
 	char	*line;
@@ -58,4 +58,19 @@ int     ft_count_lines(int fd)
 		i++;
 	}
 	return (i);
+}
+
+int	ft_go_home(int chdirrt, t_env *envp)
+{
+	const char	*home;
+
+	home = getenv("HOME");
+	if (home == NULL)
+		return (perror("cd"), 1);
+	chdirrt = chdir(home);
+	if (chdirrt == -1)
+		return (perror("cd"), 1);
+	else
+		ft_chdir_envp(envp);
+	return (0);
 }

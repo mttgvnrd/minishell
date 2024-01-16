@@ -6,7 +6,7 @@
 /*   By: mgiovana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:26:51 by mgiovana          #+#    #+#             */
-/*   Updated: 2023/10/31 12:26:53 by mgiovana         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:01:17 by mgiovana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 //In seguito, copia il nome del comando e gli argomenti dall'array 
 //array_cmds nella nuova struttura commands
 
-t_commands *ft_parser(char **array_cmds)
+t_commands	*ft_parser(char **array_cmds)
 {
 	t_commands	*cmd;
-	int		count;
+	int			count;
 
 	cmd = (t_commands *)ft_calloc(1, sizeof(t_commands));
 	if (!cmd)
@@ -42,15 +42,15 @@ t_commands *ft_parser(char **array_cmds)
 	return (cmd);
 }
 
-char    *ft_cut(char *input, int *index)
+char	*ft_cut(char *input, int *index)
 {
-    int     count;
-    char    *str;
-    char    qoutes;
+	char	*str;
+	char	qoutes;
+	int		count;
 
-    count = *index - 1;
-    str = NULL;
-    while (input[++count] && input[count] != '|')
+	count = *index - 1;
+	str = NULL;
+	while (input[++count] && input[count] != '|')
 	{
 		if (input[count] == '"' || input[count] == '\'')
 		{
@@ -59,38 +59,40 @@ char    *ft_cut(char *input, int *index)
 			while (input[++count] && input[count] != qoutes)
 				str = ft_strjoin_free(str, ft_substr(&input[count], 0, 1));
 		}
+		if (input[0] == '<')
+			input = ft_strjoin(" ", input);
 		str = ft_strjoin_free(str, ft_substr(&input[count], 0, 1));
 	}
-    if (!input[count])
-        count --;
-    *index = count;
-    return(str);
+	if (!input[count])
+		count --;
+	*index = count;
+	return (str);
 }
 
-char    **ft_split_input(char *input)
+char	**ft_split_input(char *input)
 {
-    int     i;
-    int     count;
-    char    **cmds;
-    char    *str;
+	int		i;
+	int		count;
+	char	**cmds;
+	char	*str;
 
-    str = NULL;
-    count = -1;
-    i = -1;
-    cmds = (char **)ft_calloc(1, sizeof(char *));
-    if (!cmds)
-        return (NULL);
-    while (input[++count])
-    {
-        str = ft_cut(input, &count);
-        if (str)
-        {
-            cmds[++i] = ft_strdup(str);
-            cmds = ft_double_realloc(cmds, i + 1, i + 2);
-            free(str);
-        }
-    }
-    return(cmds);
+	str = NULL;
+	count = -1;
+	i = -1;
+	cmds = (char **)ft_calloc(1, sizeof(char *));
+	if (!cmds)
+		return (NULL);
+	while (input[++count])
+	{
+		str = ft_cut(input, &count);
+		if (str)
+		{
+			cmds[++i] = ft_strdup(str);
+			cmds = ft_double_realloc(cmds, i + 1, i + 2);
+			free(str);
+		}
+	}
+	return (cmds);
 }
 
 //La funzione scorre l'array array_cmds, estrae e analizza ogni singolo 
@@ -99,8 +101,8 @@ char    **ft_split_input(char *input)
 t_commands	*ft_cmd_analyze(t_commands *cmd, char **array_cmds, t_env *env_lst)
 {
 	t_commands	*tmp;
-	int		count;
-	int		len;
+	int			count;
+	int			len;
 
 	count = -1;
 	if (!cmd)
@@ -122,19 +124,19 @@ t_commands	*ft_cmd_analyze(t_commands *cmd, char **array_cmds, t_env *env_lst)
 
 t_commands	*ft_check_input(char *str, t_env *env_lst)
 {
-    int     len;
-    int     i;
-    char    **array_cmds;
-    t_commands  *cmd;
+	int			len;
+	int			i;
+	char		**array_cmds;
+	t_commands	*cmd;
 
-    len = 0;
-    i = 0;
-    array_cmds = ft_split_input(str);
-    while (array_cmds[len])
-	    len++;
-    cmd = ft_parser(ft_lexer(array_cmds[i], env_lst));
-    if (len > 1)
-        cmd = ft_cmd_analyze(cmd, array_cmds, env_lst);
-    ft_free_double_str(array_cmds);
-    return(cmd);
+	len = 0;
+	i = 0;
+	array_cmds = ft_split_input(str);
+	while (array_cmds[len])
+		len++;
+	cmd = ft_parser(ft_lexer(array_cmds[i], env_lst));
+	if (len > 1)
+		cmd = ft_cmd_analyze(cmd, array_cmds, env_lst);
+	ft_free_double_str(array_cmds);
+	return (cmd);
 }

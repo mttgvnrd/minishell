@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 int	is_builtin(t_commands *cmd)
 {
 	if (!ft_strncmp(cmd->cmd, "echo", 5)
@@ -26,9 +25,12 @@ int	is_builtin(t_commands *cmd)
 	return (0);
 }
 
-//si occupa di impostare correttamente i descrittori di file prima dell'esecuzione
-// di un comando quando vengono utilizzate pipe, garantendo che l'input
-// e l'output siano instradati in modo appropriato tra i processi coinvolti.
+//si occupa di impostare correttamente i 
+//descrittori di file prima dell'esecuzione
+// di un comando quando vengono utilizzate 
+//pipe, garantendo che l'input
+// e l'output siano instradati in modo 
+//appropriato tra i processi coinvolti.
 static void	dup_pipe(t_exe *exec_data,
 						int *original_input, int *original_output)
 {

@@ -101,10 +101,10 @@ void	ft_create_fullcmd(t_commands *cmd)
 //di sistema, sostituisce il comando con il percorso completo
 void	ft_convertsys(t_commands *cmd, t_env *envp)
 {
-	char    **paths;
-	int		path_num;
-	char	*temp;
-	t_commands	*tmp;
+	char			**paths;
+	int				path_num;
+	char			*temp;
+	t_commands		*tmp;
 
 	paths = ft_getpath(envp);
 	tmp = cmd;
