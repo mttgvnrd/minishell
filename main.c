@@ -100,7 +100,7 @@ int	ft_init_shell(char **env)
 	{
 		str = readline("minishell ");
 		if (!str)
-			str = (ft_strdup("exit"));
+			str = ("exit");
 		add_history(str);
 		if (ft_open_quotes(str))
 			continue ;

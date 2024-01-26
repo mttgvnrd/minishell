@@ -4,7 +4,7 @@
    ...
    ...
    fun:readline
-   fun:main
+   fun:ft_init_shell
 }
 
 {
@@ -21,14 +21,6 @@
    Memcheck:Leak
    ...
    ...
-   fun:readline_internal_teardown
-   fun:readline
-}
-
-{
-   readline
-   Memcheck:Leak
-   ...
-   ...
    fun:add_history
+   fun:ft_init_shell
 }
